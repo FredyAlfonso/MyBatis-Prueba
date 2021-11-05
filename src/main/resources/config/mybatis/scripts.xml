@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mybatis.prueba.repository.PersonaRepository">
+    <resultMap id="PersonaList" type="Persona">
+        <id property="numeroDocumento" column="numeroDocumento"/>
+        <result property="tipoDocumento" column="tipoDocumento"/>
+        <result property="nombres" column="nombres"/>
+        <result property="apellidos" column="apellidos"/>
+    </resultMap>
+
+    <insert id="create" parameterType="com.mybatis.prueba.model.Persona">
+        INSERT INTO TERCERO (NUMERO_DOCUMENTO, TIPO_DOCUMENTO, NOMBRES, APELLIDOS)
+        VALUES(#{numeroDocumento, jdbcType=INTEGER}, #{tipoDocumento, jdbcType=VARCHAR}, #{nombres, jdbcType=VARCHAR}, #{apellidos, jdbcType=VARCHAR})
+    </insert>
+    
+    <select id="read" parameterType="INTEGER" resultType="com.mybatis.prueba.model.Persona">
+        SELECT NUMERO_DOCUMENTO as numeroDocumento, TIPO_DOCUMENTO as tipoDocumento, NOMBRES as nombres, APELLIDOS as apellidos
+        FROM TERCERO WHERE NUMERO_DOCUMENTO = #{numeroDocumento, jdbcType=INTEGER}
+    </select>
+</mapper>
